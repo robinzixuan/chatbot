@@ -1,0 +1,14 @@
+uid,name,type,price,recommended
+1,zara1,tops, 1.22, 1
+2,zara2,tops, 2.33, 0
+3,zara3,t-shirs, 5, 1
+4,zara4,t-shirs, 10, 0
+5,zara5,suit,1000, 1
+6,zara6,suit, 200, 0
+7,zara7,bags, 10, 0
+8,zara8,jeans, 40, 1
+9,zara9,pants, 40, 0
+10,zara10,pants,80, 1
+11,zara11,shirt, 30, 0
+12,zara12,coats, 120, 0
+13,zara13,blazers, 29, 0

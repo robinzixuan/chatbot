@@ -1,0 +1,9 @@
+.DS_store
+venv/
+__pycache__
+*.pth
+*.bpe
+*.json
+*.meta
+.vscode/
+nlp_chatbot/model/pretrained-models/
