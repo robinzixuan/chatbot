@@ -22,7 +22,7 @@ def interact_model(
     seed=None,
 ):
 
-    models_dir = os.path.join(os.getcwd(), 'model/pretrained-models')
+    models_dir = os.path.join(os.getcwd(), 'nlp_chatbot/model/pretrained_models')
     if batch_size is None:
         batch_size = 1
     assert nsamples % batch_size == 0

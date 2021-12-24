@@ -31,7 +31,8 @@ class NeuralNet(nn.Module):
         out = self.l2(out)
         out = self.relu(out)
         out = self.l3(out)
-        out = torch.reshape(out, (-1,8))
+        print(out.shape)
+        out = torch.reshape(out, (-1,12))
         # no activation and no softmax at the end
         return out
 
