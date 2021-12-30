@@ -17,7 +17,7 @@ class NeuralNet(nn.Module):
         
         self.bert = BERTModel(voc_size)
         self.BERTLanguageModel = BERTLanguageModel(self.bert, voc_size)
-
+        self.num_classes = num_classes
         self.l1 = nn.Linear(input_size, hidden_size) 
         self.l2 = nn.Linear(hidden_size, hidden_size) 
         self.l3 = nn.Linear(hidden_size, num_classes)
@@ -31,8 +31,8 @@ class NeuralNet(nn.Module):
         out = self.l2(out)
         out = self.relu(out)
         out = self.l3(out)
-        print(out.shape)
-        out = torch.reshape(out, (-1,12))
+        #print(out.shape)
+        out = torch.reshape(out, (-1,self.num_classes))
         # no activation and no softmax at the end
         return out
 
