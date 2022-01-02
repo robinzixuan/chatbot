@@ -45,8 +45,8 @@ bot_name = "Staff"
 
     # sentence = "do you use credit cards?"
 
-def chatbot_response(s, raw_text):
-    sentence = tokenize(s)
+def chatbot_response(input_utt, raw_text):
+    sentence = tokenize(input_utt)
     X = bag_of_words(sentence, all_words)
     X = X.reshape(1, X.shape[0])
     X = torch.from_numpy(X).to(device)
@@ -63,56 +63,65 @@ def chatbot_response(s, raw_text):
         for intent in intents['intents']:
             if tag == intent["tag"]:
                 res = random.choice(intent['responses'])
+
+        if tag == 'clothes':
+            clothes_k =''
+            for i in clothes_kind:
+                clothes_k += i
+                clothes_k += ","
+            res +=  "We offer those kind of clothes" + clothes_k
+            raw_text += '\n' + 'user: '+ input_utt + '\n' + 'bot: ' + res
+        elif tag=="recommand":
+            clothes_recommand = clothes_data[clothes_data['recommended'] == 1]
+            clothes_r = ''
+            for i in clothes_recommand['name']:
+                clothes_r += i
+                clothes_r += ","
+            res +=  "We recommand those kind of clothes " + clothes_r
+            raw_text += '\n' + 'user: '+ input_utt + '\n' + 'bot: ' + res
+        elif tag=='discount':
+            res += str(random.choice(discount)) + "%"
+            raw_text += '\n' + 'user: '+ input_utt + '\n' + 'bot: ' + res
+        elif tag=="kinds":
+            for i in punctuation_string:
+                input_utt = input_utt.replace(i, '')
+            objects = input_utt.split()[-1]
+            if objects in list(clothes_kind):
+                clothes = clothes_data[clothes_data['type'] == objects]
+                cloth = ''
+                for i in clothes['name']:
+                    cloth += i 
+                    cloth += ','
+                res += "Yes, we offer " + cloth
+                raw_text += '\n' + 'user: '+ input_utt + '\n' + 'bot: ' + res
+            else:
+                res += "We are not offer this type, sorry"
+                raw_text += '\n' + 'user: '+ input_utt + '\n' + 'bot: ' + res
+        elif tag=='price_spefic':
+            for i in punctuation_string:
+                input_utt = input_utt.replace(i, '')
+            objects = input_utt.split()[-1]
+            if objects in list(clothes_data['name']):
+                price = float(clothes_data[clothes_data['name'] == objects]['price'])
+                res += "The price is  " + str(price)
+                raw_text += '\n' + 'user: '+ input_utt + '\n' + 'bot: ' + res
+            else:
+                res += "We are not offer, sorry"
+                raw_text += '\n' + 'user: '+ input_utt + '\n' + 'bot: ' + res
+        else:
+            raw_text += '\n' + 'user: '+ input_utt + '\n' + 'bot: ' + res
                
     else:
         result, raw_text = chbot.interact_model(
             nsamples=nsamples,
             raw_text = raw_text,
-            input_utt = s,
+            input_utt = input_utt,
             top_k= top_k,
             top_p= top_p,
             temperature= temperature,
             batch_size= batch_size,
             length= length)
         
-        res = result 
+        res = result + "Do you want to buy some clothes?"
 
-
-    if tag == 'clothes':
-        clothes_k =''
-        for i in clothes_kind:
-            clothes_k += i
-            clothes_k += ","
-        res +=  "We offer those kind of clothes" + clothes_k
-    elif tag=="recommand":
-        clothes_recommand = clothes_data[clothes_data['recommended'] == 1]
-        clothes_r = ''
-        for i in clothes_recommand['name']:
-            clothes_r += i
-            clothes_r += ","
-        res +=  "We recommand those kind of clothes " + clothes_r
-    elif tag=='discount':
-        res += str(random.choice(discount)) + "%"
-    elif tag=="kinds":
-        for i in punctuation_string:
-            s = s.replace(i, '')
-        objects = s.split()[-1]
-        if objects in list(clothes_kind):
-            clothes = clothes_data[clothes_data['type'] == objects]
-            cloth = ''
-            for i in clothes['name']:
-                cloth += i 
-                cloth += ','
-            res += "Yes, we offer " + cloth
-        else:
-            res += "We are not offer this type, sorry"
-    elif tag=='price_spefic':
-        for i in punctuation_string:
-            s = s.replace(i, '')
-        objects = s.split()[-1]
-        if objects in list(clothes_data['name']):
-            price = float(clothes_data[clothes_data['name'] == objects]['price'])
-            res += "The price is  " + str(price)
-        else:
-            res += "We are not offer, sorry"
     return res, raw_text
