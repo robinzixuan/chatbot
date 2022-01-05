@@ -45,7 +45,7 @@ bot_name = "Staff"
 
     # sentence = "do you use credit cards?"
 
-def chatbot_response(input_utt, raw_text):
+def chatbot_response(input_utt, raw_text, count):
     sentence = tokenize(input_utt)
     X = bag_of_words(sentence, all_words)
     X = X.reshape(1, X.shape[0])
@@ -110,6 +110,7 @@ def chatbot_response(input_utt, raw_text):
                 raw_text += '\n' + 'user: '+ input_utt + '\n' + 'bot: ' + res
         else:
             raw_text += '\n' + 'user: '+ input_utt + '\n' + 'bot: ' + res
+        count = 0
                
     else:
         result, raw_text = chbot.interact_model(
@@ -121,7 +122,10 @@ def chatbot_response(input_utt, raw_text):
             temperature= temperature,
             batch_size= batch_size,
             length= length)
-        
-        res = result + "Do you want to buy some clothes?"
+        count += 1
+        if count > 3:
+            res = result + "Do you want to buy some clothes?"
+        else:
+            res = result
 
-    return res, raw_text
+    return res, raw_text, count
