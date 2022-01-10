@@ -25,7 +25,7 @@ pip install -r requirements.txt
 
 1) Clone the frontend-chatjs and nlp-chatbot into your system and copy it into the virtual environment (venv).
 2) Follow the individual documentation of nlp-chatbot for futher setup.
-3) Change the port addess in app.py whether not conflict your computer port using and run the app.py. In default, you should run 
+3) Change the port addess in app.py whether not conflict your computer port using and run the app.py. In default, you should open with webpage  
 
 
 

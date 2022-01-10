@@ -1,0 +1,20 @@
+action0 = ["Are you enjoying your afternoon?", "How’s your day going?", "Who are we shopping for today?", "Are you finding what you thought you would?"]
+action1 = ["Our store provide the all kinds of the womand clothes", "Our store provide some fashion clothes which you might like", "This kind of clothes is suitable for recent weather"]
+action2 = ["This kind of clothes is good selling in our store", "This kind of clothes is almost out of stock", "The price of this clothes is ...."]
+action3 = ["This clothes have some discount for recently", "This is clothes is the most fashion style"]
+action4 = ["Thanks for your purchase.","Have a good day."]
+action5 = ["What brings you in to see us again?", "It’s great to see you again.", "Welcome back! How’ve you been?", "Did you have a good weekend?"]
+
+
+
+greeting_loyal = ["What brings you in to see us again?", "It's great to see you again.", "Welcome back! How’ve you been?", "Did you have a good weekend?"]
+greeting_normal = ["Are you enjoying your afternoon?", "How’s your day going?", "Who are we shopping for today?", "Are you finding what you thought you would?"]
+Recognition = ["Our store provide the all kinds of the womand clothes", "Our store provide some fashion clothes which you might like", "This kind of clothes is suitable for recent weather"]
+type_ask = ['What kind of clothes are you looking for']
+price_ask = ['What price is suitablr for you', 'What price area are you looking for?']
+recommand_give = ['I belive [name] maybe suitable for your requirements', 'For myself, I would like to choose [name]']
+discount_give = ['We can give you some cheap price with [discount]', 'we offer you discount with [discount]']
+price_give = ['This clothes have the price with [price]']
+ask_clothes =['What clothes are you ask the price?']
+decision = ["Thanks for your purchase.","Have a good day."]
+information_impuse = ["Those clothes have some discount for recently", "Those clothes are the most fashion style"]
